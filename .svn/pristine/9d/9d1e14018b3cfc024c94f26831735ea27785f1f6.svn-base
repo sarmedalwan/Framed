@@ -1,0 +1,29 @@
+package inputTools;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class PdfTextExtractorTest {
+    private PdfTextExtractor textExtractor;
+
+    @Before
+    public void createDefaultExtractor(){
+        textExtractor = new PdfTextExtractor();
+
+    }
+
+    @Test
+    public void testCreation(){
+        assertTrue(textExtractor.textStripper != null);
+
+    }
+
+    @Test
+    public void testTextExtraction(){
+        String extractedText = textExtractor.getTextFromPdfFile("src/resources/test.pdf");
+        assertEquals("Hello this is a dummy", extractedText);
+    }
+
+}

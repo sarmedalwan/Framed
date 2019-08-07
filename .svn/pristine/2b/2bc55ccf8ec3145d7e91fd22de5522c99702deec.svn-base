@@ -1,0 +1,34 @@
+package inputTools;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+
+import java.io.File;
+import java.io.IOException;
+
+public class PdfTextExtractor {
+
+    PDFTextStripper textStripper;
+
+    PdfTextExtractor(){
+        try {
+            initializeExtractor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeExtractor() throws IOException {
+        this.textStripper = new PDFTextStripper();
+    }
+
+    public String getTextFromPdfFile(String filePath){
+        try {
+            PDDocument pdfDocument = PDDocument.load(new File(filePath));
+            return textStripper.getText(pdfDocument).trim();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}

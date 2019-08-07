@@ -1,0 +1,7 @@
+package computeSimilarities;
+
+public class testGetSimilarities {
+    public static void testGetSimilarities(){
+
+    }
+}
