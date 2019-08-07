@@ -1,0 +1,53 @@
+package compute_similarities;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+public class SortListOfPDFsAndCalculateSimilarities {
+
+	public static ArrayList<PDF> pdfs = new ArrayList<PDF>();
+
+	public static double getSimilarity(PDF first, PDF second) {
+		double result = 0;
+		HashMap<String, Integer> firstPDFFrequencies = first.getWordFrequencies();
+		HashMap<String, Integer> secondPDFFrequencies = second.getWordFrequencies();
+
+
+		if (firstPDFFrequencies != null && secondPDFFrequencies != null) {
+			Iterator iterator = firstPDFFrequencies.entrySet().iterator();
+			while (iterator.hasNext()) {
+				Entry wordEntry1 = (Entry) iterator.next();
+				Object word = wordEntry1.getKey();
+				Object frequency = wordEntry1.getValue();
+				if(secondPDFFrequencies.containsKey(word)) {
+					double match = Math.min((int)frequency,secondPDFFrequencies.get(word));
+					result+=match;
+				}
+			}
+			result = result/Math.max(first.getWords().size(), second.getWords().size());
+		}
+		return result;
+	}
+
+	public static ArrayList<PDF> getSimilarities(ArrayList<PDF> pdfs)
+	{
+		if(pdfs==null||pdfs.size()==0){
+			return null;
+		}
+		for (int i = 0; i < pdfs.size()-1; i++) {
+			for (int j = pdfs.size()-1; j > i; j--) {
+				PDF first = pdfs.get(i);
+				PDF second = pdfs.get(j);
+				double similarity = getSimilarity(first, second);
+				first.similarities.putIfAbsent(second.name, similarity);
+				second.similarities.putIfAbsent(first.name, similarity);
+			}
+		}
+		return pdfs;
+	}
+}
+
