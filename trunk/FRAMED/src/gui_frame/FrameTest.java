@@ -1,10 +1,5 @@
 package gui_frame;
 
-/**
- * Driver: ip64169
- * Navigators: vaglag, cjgore
- */
-
 import compute_similarities.PDF;
 import org.junit.Before;
 import org.junit.Test;
