@@ -1,11 +1,5 @@
 package gui_frame;
 
-/**
- *
- * Driver: vaglag
- * Navigators: cjgore, ip64169
- */
-
 import compute_similarities.PDF;
 import compute_similarities.SortListOfPDFsAndCalculateSimilarities;
 import compute_similarities.Spring;
